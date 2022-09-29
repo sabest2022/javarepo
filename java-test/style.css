@@ -1,0 +1,22 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+div {
+    display: flex;
+    background-color: black;
+    width: 50rem;
+    height: 50rem;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.test {
+    width: 40rem;
+    height: 40rem;
+    background-color: rgb(35, 35, 79);
+}
