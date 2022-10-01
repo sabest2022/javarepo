@@ -5,73 +5,62 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="test.js"></script>
+    <title>Login / Sign Up Form</title>
+    <link rel="stylesheet" href="main.css">
 
 </head>
 
 <body>
-    <div id="ett">
+    <div class="container">
+        <form class="form " id="login">
+            <h1 class="form__title">Login</h1>
+            <div class="form__message form__message--error"></div>
+            <div class="form__input-group">
+                <input type="text" class="form__input" autofocus placeholder="Username or email">
+                <div class="form__input-error-message"></div>
+            </div>
+            <div class="form__input-group">
+                <input type="password" class="form__input form__input--error" autofocus placeholder="Password">
+                <div class="form__input-error-message"></div>
+            </div>
+            <button class="form__button" type="submit">Continue</button>
+            <p class="form__text">
+                <a href="#" class="form__link">Forgot your password?</a>
+            </p>
+            <p class="form__text">
+                <a href="./" class="form__link" id="linkCreateAccount">Don't have an account? Creat account.</a>
+            </p>
 
-        <!-- <label for="frame">name</label> -->
-        <input type="text" id="user" placeholder="User name">
-        <input type="password" id="pass" placeholder="password">
-        <button id="sign"> Sign in!</button>
+        </form>
 
+        <form class="form form--hidden" id="createAccount">
+            <h1 class="form__title">Create Account</h1>
+            <div class="form__message form__message--error"></div>
+            <div class="form__input-group">
+                <input type="text" class="form__input" autofocus placeholder="Username">
+                <div class="form__input-error-message"></div>
+            </div>
+            <div class="form__input-group">
+                <input type="text" class="form__input" autofocus placeholder="email Address">
+                <div class="form__input-error-message"></div>
+            </div>
+            <div class="form__input-group">
+                <input type="password" class="form__input " autofocus placeholder="Password">
+                <div class="form__input-error-message"></div>
+            </div>
+            <div class="form__input-group">
+                <input type="password" class="form__input " autofocus placeholder="Confirm Password">
+                <div class="form__input-error-message"></div>
+            </div>
+            <button class="form__button" type="submit">Continue</button>
+
+            <p class="form__text">
+                <a href="./" class="form__link" id="linkLogin">Already have an account? Sign in</a>
+            </p>
+
+        </form>
     </div>
-    <div class="test">
-
-    </div>
-
+    <script src="main.js"></script>
 </body>
-<script>
-    let userName = [];
-    let passWord = [];
-    const dataList = { userNam: 'Saeed', passWor: 'ss1234' };
-
-    // make an object from any new sign up
-    const users = document.querySelector("#user");
-    const passes = document.querySelector("#pass");
-    const btn = document.querySelector('#sign');
-
-    btn.onclick = function () {
-        console.log(users.value);
-        userName.push(user.value);
-        console.log(userName);
-        if (users.value == "saeed" && passes.value === "ss1234") {
-            document.getElementById('ett').style.display = 'none';
-            const heading = document.createElement("h1");
-            heading.innerText = "You are logged in, Welcome!";
-            const body = document.createElement('body');
-            document.body.insertAdjacentElement('beforebegin', heading);
-        }
-        else {
-            // show up an alert and ask to write new user & passWord
-            // also reset the placeholdfers
-            alert('username and/or pass invalid, try again!');
-            document.getElementById('user').value = '';
-            document.getElementById('pass').value = '';
-        }
-    };
-
-    // const dev = document.getElementsByClassName('ett');
-
-    // document.div.appendChild(heading);
-
-    btn.addEventListener('click', () => {
-        // alert("information Saved");
-    })
-
-
-    function greet(yourName) {
-        console.log(`My name is: ${yourName}`)
-    }
-
-    const allDives = document.getElementsByTagName('div');
-    for (let div of allDives) {
-        console.log(div.id)
-    }
-</script>
 
 </html>

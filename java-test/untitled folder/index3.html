@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@1&family=Roboto:ital,wght@0,500;0,700;1,500&display=swap"
+        rel="stylesheet">
+    <script src="test.js"></script>
+
+</head>
+
+<body>
+    <div id="ett">
+
+        <!-- <label for="frame">name</label> -->
+        <input type="text" id="user" placeholder="User name">
+        <input type="password" id="pass" placeholder="password">
+        <button id="sign"> Sign in!</button>
+
+    </div>
+    <div class="test">
+
+    </div>
+
+</body>
+<script>
+    let userName = [];
+    let passWord = [];
+    const dataList = { userNam: 'Saeed', passWor: 'ss1234' };
+
+    // make an object from any new sign up
+    const users = document.querySelector("#user");
+    const passes = document.querySelector("#pass");
+    const btn = document.querySelector('#sign');
+
+    btn.onclick = function () {
+        console.log(users.value);
+        userName.push(user.value);
+        console.log(userName);
+        if (users.value == "saeed" && passes.value === "ss1234") {
+            document.getElementById('ett').style.display = 'none';
+            const heading = document.createElement("h1");
+            heading.innerText = "You are logged in, Welcome!";
+            const body = document.createElement('body');
+            document.body.insertAdjacentElement('beforebegin', heading);
+        }
+        else {
+            // show up an alert and ask to write new user & passWord
+            // also reset the placeholdfers
+            alert('username and/or pass invalid, try again!');
+            document.getElementById('user').value = '';
+            document.getElementById('pass').value = '';
+        }
+    };
+
+    // const dev = document.getElementsByClassName('ett');
+
+    // document.div.appendChild(heading);
+
+    btn.addEventListener('click', () => {
+        // alert("information Saved");
+    })
+
+
+    function greet(yourName) {
+        console.log(`My name is: ${yourName}`)
+    }
+
+    const allDives = document.getElementsByTagName('div');
+    for (let div of allDives) {
+        console.log(div.id)
+    }
+</script>
+
+</html>
