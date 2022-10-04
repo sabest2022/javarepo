@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="loginscript.js"></script>
+    <title>Document</title>
+    <style>
+        body {
+            height: 50vh;
+            align-items: center;
+            justify-content: center;
+            display: flex;
+
+        }
+
+        div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 20rem;
+            height: 20rem;
+            background-color: bisque;
+            flex-direction: column;
+        }
+
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <input type="text" class="userIn form__input" id="signupUsername" placeholder="username"> </input>
+        <input type="password" class="passwordIn form__input" id="signupPass" placeholder="Password"> </input>
+        <button class="Btn" id="Btn"> submit</button>
+        <p class="hidden" Id=" error_message">Username and password must </p>
+    </div>
+</body>
+
+
+</html>

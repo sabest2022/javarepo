@@ -1,44 +1,57 @@
 const gate = document.querySelector(".gate");
-const text = document.querySelector(".text");
+const text = document.querySelector(".gate p");
 const form = document.querySelector(".form");
-const input = document.querySelector(".input");
-const openGateBtn = document.querySelector(".openGatebtn");
-const walkoutBtn = document.querySelector(".openGatebtn");
-
-let UsersData[
+const inputuser = document.querySelector(".userInput");
+const inputpass = document.querySelector(".passInput");
+const openGateBtn = document.querySelector(".openGateBtn");
+const walkoutBtn = document.querySelector(".walkoutBtn");
+const secretcode = "223344"
+let usersData = [
     {
-        username: saeedaskari,
-        password: saeed12345,
+        username: "saeed",
+        password: "12345",
     },
     {
-        username: shahrad2020,
-        password: vinter2022,
+        username: "shah",
+        password: "2022",
     },
 ]
 
-openGateBtn.addEventListener("click", "hej");
+openGateBtn.addEventListener("click", cheackCode);
+walkoutBtn.addEventListener("click", walkout);
 
 function cheackCode() {
-    if (inputUser.value === usercode) {
-        renderSuccessfulUI();
-    } else {
-        renderFailUI();
+    for (let i = 0; i < usersData.length; i++) {
+        if (inputuser.value === usersData[i].username && inputpass.value === usersData[i].password) {
+            renderSuccessUI();
+            return;
+        }
     }
+    renderFailUI();
 }
 
 function renderSuccessUI() {
-    gate.style.backgrundColor = "green";
+    gate.style.backgroundColor = "green";
+
     text.innerText = "You are inloged";
     form.style.display = "none";
     walkoutBtn.style.display = "block";
 }
 function renderFailUI() {
     text.innerText = " Wrong Password/Username";
-    input.value = "";
+    gate.style.backgroundColor = "red";
+    reset()
 }
 
-function walkOutI() {
-    gate.style.backgrundColor = "red";
-    text.innerText = "";
-    walkoutBtn.style.display = "none;"
+function walkout() {
+    gate.style.backgroundColor = "blueviolet";
+    text.innerText = "Check in again!";
+    walkoutBtn.style.display = "none";
+    form.style.display = "block";
+    reset()
+
+}
+function reset() {
+    inputuser.value = "";
+    inputpass.value = "";
 }

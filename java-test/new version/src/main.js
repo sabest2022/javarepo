@@ -46,6 +46,8 @@ document.addEventListener("DOMContentLoaded", () => {
         inputElement.addEventListener("blur", e => {
             if (e.target.id === "signupUsername" && e.target.value.length > 0 && e.target.value.length < 10) {
                 setInputError(inputElement, "Username must be at least 10 characters in length");
+            } else if (e.target.id === "signupPass" && e.target.value.length > 0 && e.target.value.length < 7) {
+                setInputError(inputElement, "Password must be at least 67 characters in length");
             }
         });
 
@@ -54,16 +56,5 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    document.querySelectorAll(".form__input").forEach(inputElement => {
-        inputElement.addEventListener("blur", e => {
-            if (e.target.id === "signupPass" && e.target.value.length > 0 && e.target.value.length < 8) {
-                setInputError(inputElement, "Password must be at least 8 characters in length");
-            }
-        });
-
-        inputElement.addEventListener("input", e => {
-            clearInputError(inputElement);
-        });
-    });
 
 });
