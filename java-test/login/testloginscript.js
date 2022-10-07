@@ -1,26 +1,37 @@
 
 
-localStorage.setItem("newList", Date.now()) || [];
-var newList = JSON.parse(localStorage.getItem("newList"))
+// att the first time document loads
+let newList = [];
+
+newList = localStorage.getItem('a');
 console.log(newList);
+// when document loads again
 // document.addEventListener("DOMContentLoaded", () => {
+//     let newList = localStorage;
+//     click();
+// });
+
     // localStorage.getItem("name");
+    // function click(){
     const signinButton = document.getElementById("Btn");
-    signinButton.addEventListener("click" , e => {
+signinButton.addEventListener("click" , e => {
     
-    const inputUser = document.querySelector(".userIn").value;
+    const inputUser = document.querySelector("signupUsername").value;
     const inputPassword = document.querySelector(".passwordIn").value;
     
     newList = newList.concat({ userName: inputUser, password: inputPassword });
     const a = newList;
         // register();
         // newList = newList.concat({ password: inputPassword, lastName: "kjk" });
-        console.log(a);
+        console.log(localStorage);
     localStorage.setItem("a", JSON.stringify(a));
     // JSON.parse(a) = newList;
     console.log(a);
-    // var pas = localStorage.key(2);
+    
 });
+    
+    // var pas = localStorage.key(2);
+   
 // });
 
 

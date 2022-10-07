@@ -28,18 +28,24 @@
         .hidden {
             display: none;
         }
+
+        .form {
+            display: inline;
+        }
     </style>
 </head>
 
 <body>
     <div>
-        <input type="text" class="userIn form__input" id="signupUsername" placeholder="username"> </input>
-        <input type="password" class="passwordIn form__input" id="signupPass" placeholder="Password"> </input>
-        <button class="Btn" id="Btn" type="submit"> sign up</button>
+        <input type="text" class="userIn form__input form" id="signupUsername" placeholder="username"> </input>
+        <input type="password" class="passwordIn form__input form" id="signupPass" placeholder="Password"> </input>
+        <button class="Btn form" id="openBtn" type="submit"> sign up</button>
         <p class="hidden" Id=" error_message"> Username and password must </p>
+        <p class="hidden" Id=" signup"> you should sign up! </p>
+        <p class="hidden" Id=" welcome"> you are in loged, welcomew! </p>
     </div>
 
-    <script src="testloginscript.js"></script>
+    <script src="loginscript.js"></script>
 </body>
 
 
