@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (e.target.id === "signupUsername" && e.target.value.length > 0 && e.target.value.length < 10) {
                 setInputError(inputElement, "Username must be at least 10 characters in length");
             } else if (e.target.id === "signupPass" && e.target.value.length > 0 && e.target.value.length < 7) {
-                setInputError(inputElement, "Password must be at least 67 characters in length");
+                setInputError(inputElement, "Password must be at least 7 characters in length");
             }
         });
 
