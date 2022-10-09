@@ -80,17 +80,17 @@
 </head>
 
 <body>
-    <div class="container">
+    <div class="form" id="login">
         <header class="form-hidden" id="head"><span id="showUser"> </span> loged in!</header>
-        <div id="login" class="">
+        <form id="login" class="">
             <input type="text" class="userIn form__input form" autofocus placeholder="username"> </input>
             <input type="password" class="passwordIn form__input form" placeholder="Password"> </input>
             <button class="Btn form" id="openBtn" type="submit"> sign in</button>
             <p class="form-hidden" Id=" error_message"> Username and password must </p>
             <p class="form-hidden" Id=" signup"> you should sign up! </p>
             <p class="form-hidden" Id=" welcome"> you are in loged, welcomew! </p>
-        </div>
-        <div class=" form-hidden" id="createAccount">
+        </form>
+        <form class="form form--hidden" id="createAccount">
             <input type="text" class="newuserIn form__input form" id="signupUser" autofocus placeholder="username">
             </input>
             <input type="password" class="newpasswordIn form__input form" id="signupPass" placeholder="Password">
@@ -98,11 +98,11 @@
             <button class="Btn form" id="regBtn" type="submit"> sign up</button>
             <p Id="signup"> you should sign up! </p>
             <p class="form-hidden" id="user_error-message">username unavailable, chose another one!</p>
-        </div>
-        <div class="form-welcome form-hidden" id="welcome-page">
-            <h1>Welcome to Sabest AB.!</h1>
-            <button class="Btnback" id="backBtn" type="submit"> logout and back to sign in page</button>
-        </div>
+            <form>
+                <div class="form-welcome form-hidden" id="welcome-page">
+                    <h1>Welcome to Sabest AB.!</h1>
+                    <button class="Btnback" id="backBtn" type="submit"> logout and back to sign in page</button>
+                </div>
 
     </div>
 
