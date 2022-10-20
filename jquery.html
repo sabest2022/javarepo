@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous">
+        </script>
+
+    <!--jQuery code-->
+    <script>
+        $(document).ready(function () {
+
+            var saeed = "<button></button>"
+            var x = $(saeed).text('Test create Btn').click(function () { alert('Hi') });
+            $("body").append(x)
+            $("button").click(function () {
+                // $("p").css("color", "green");
+                $("div").css({ "background-color": "brown", "color": "white" });
+                $(".mydiv").height(100);
+                $(".mydiv").width(100);
+            });
+        });
+        $(document).ready(function () {
+            $("button").dblclick(function () {
+                // $("p").css("color", "green");
+                $("div").css({ "background-color": "yellow", "color": "black", "padding": "1rem" });
+                $(".mydiv").width(200).height(100);
+
+            });
+        });
+        function setElement(elementType, textContent, klasName, appendTo) {
+            const x = document.createElement(`${elementType}`);
+            x.innerText = textContent;
+            appendTo.appendChild(x);
+            x.classList = (klasName);
+            return x;
+        }
+
+        setElement("h1", "i am a H1...", "one-class", "body")
+
+
+    </script>
+    <button>
+        Change the color and div size
+    </button>
+</head>
+
+<body>
+    <div class="mydiv">
+        <p>This is a paragraph!</p>
+    </div>
+    <p>This is a paragraph!</p>
+</body>
+
+</html>
