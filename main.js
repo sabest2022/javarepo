@@ -68,11 +68,8 @@ function addProductsToWebpage() {
         // const productAddToCartIcon = document.createElement("i");
         // const productAddToCartText = document.createElement("p");
 
-
-
-
         // When clicking on the add to shopping cart button the object gets stored in local storage
-        productAddToCartBtn.addEventListener("click", function () {
+        productAdd.addEventListener("click", function () {
             this.setAttribute("disabled", true);
             // console.log(product);
             if (!localStorage.getItem("cart")) {
@@ -89,8 +86,6 @@ function addProductsToWebpage() {
         // });
 
 
-
-
         // CLASSES
         // productContainer.classList = ("productContainer");
         // productTitle.classList = ("productTitle");
@@ -100,8 +95,6 @@ function addProductsToWebpage() {
         // productAddToCartBtn.classList = ("productAddToCartBtn");
         // productAddToCartIcon.classList = ("fa-solid fa-cart-arrow-down productAddToCartIcon");
         // productAddToCartText.classList = ("productAddToCartText");
-
-
 
 
         // PRODUCT NAME & DESCRIPTION
@@ -120,8 +113,6 @@ function addProductsToWebpage() {
         // productAddToCartText.innerText = "Lägg till i kundvagnen";
 
 
-
-
         // PRODUCT APPENDED INSIDE CONTAINER
         // document.querySelector("main").appendChild(productContainer);
         // productContainer.appendChild(productTitle);
@@ -133,7 +124,6 @@ function addProductsToWebpage() {
         // productAddToCartBtn.appendChild(productAddToCartText);
     }
 }
-
 
 // Checks if there is a cart key in local storage and if so it adds them to the shopping cart page, otherwise if not then nothing really happens
 function addLocalStorageCartProductsToCartPage() {
@@ -177,8 +167,6 @@ function addLocalStorageCartProductsToCartPage() {
             // const cartProductRemoveFromCartText = document.createElement("p");
 
 
-
-
             // CLASSES
             // cartContainer.classList = ("cartContainer");
             // cartProductContainer.classList = ("cartProductContainer");
@@ -188,8 +176,6 @@ function addLocalStorageCartProductsToCartPage() {
             // cartProductRemoveFromCartBtn.classList = ("cartProductRemoveFromCartBtn");
             // cartProductRemoveFromCartIcon.classList = ("fa-regular fa-trash-can cartProductRemoveFromCartIcon");
             // cartProductRemoveFromCartText.classList = ("cartProductRemoveFromCartText");
-
-
 
 
             // // LOCALSTORAGE PRODUCT IMAGE
@@ -207,8 +193,6 @@ function addLocalStorageCartProductsToCartPage() {
             // cartProductRemoveFromCartText.innerText = "Ta bort";
 
 
-
-
             // PRODUCTS APPENDED INSIDE OF CART CONTAINER
             // document.querySelector("main").appendChild(cartContainer);
             // cartContainer.appendChild(cartProductContainer);
@@ -220,16 +204,12 @@ function addLocalStorageCartProductsToCartPage() {
             // cartProductRemoveFromCartBtn.appendChild(cartProductRemoveFromCartText);
 
 
-
-
             // This function removes the parent container that holds all the cart products as well as the total price header & complete purchase button
             function removesCartContent() {
                 cartContainer.remove();
                 cartTotalPrice.remove();
                 cartCompletePurchaseBtn.remove();
             }
-
-
 
 
             // When you press the product "Ta bort" button it removes the object from cart LS
