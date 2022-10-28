@@ -12,33 +12,61 @@ function loadProducts() {
         });
 }
 
+// Assigns the amount of products in the shopping cart to the cart product amount indicator
+function totalCartProducts() {
+    if (localStorage.getItem("cart")) {
+        const cartLS = JSON.parse(localStorage.getItem("cart"));
+        document.querySelector(".cart-number-container div").textContent = cartLS.length;
+        document.querySelector(".cart-number-container div").style.display = "flex";
+    } else {
+        document.querySelector(".cart-number-container div").style.display = "none";
+    }
+}
 
 function initSite() {
     loadProducts();
     // This would also be a good place to initialize other parts of the UI
+    totalCartProducts();
 }
-function setElement(textContent, elementType, klasName, appendTo, srcUrl, srcAlt) {
-    const x = document.createElement(`${elementType}`);
-    x.innerText = textContent;
+
+function setImgElement(srcUrl, srcAlt, klasName, appendTo) {
+    const x = document.createElement("img");
     appendTo.appendChild(x);
     x.classList = (klasName);
     x.setAttribute("src", srcUrl); x.setAttribute("alt", srcAlt);
     return x;
 }
 
+function setElement(elementType, textContent, klasName, appendTo) {
+    const x = document.createElement(`${elementType}`);
+    x.innerText = textContent;
+    appendTo.appendChild(x);
+    x.classList = (klasName);
+    return x;
+}
+
+
 /* Uses the loaded products data to create a visible product list on the website */
 function addProductsToWebpage() {
     for (const product of listOfProducts) {
 
-        // // PRODUCT ELEMENTS
+        // PRODUCT ELEMENTS
+        const productContainer = setElement("div", null, "productContainer", document.querySelector("main"));
+        setElement("h1", product.title, "prooductTitle", productContainer);
+        setElement("p", product.description, "productDescription", productContainer);
+        setImgElement(`./assets/${product.image}`, `Picture of a ${product.title}`, "productImage", productContainer);
+        setElement("h2", `${product.price} kr`, "productPrice", productContainer);
+        const productAdd = setElement("button", null, "productAddToCartBtn", productContainer);
+        setElement("i", null, "fa-solid fa-cart-arrow-down productAddToCartIcon", productAdd);
+        setElement("p", "Lägg till i kundvagnen", "productAddToCartText", productAdd)
         // const productContainer = document.createElement("div");
         // const productTitle = document.createElement("h1");
         // const productDescription = document.createElement("p");
         // const productImage = document.createElement("img");
         // const productPrice = document.createElement("h2");
-        const productAddToCartBtn = document.createElement("button");
-        const productAddToCartIcon = document.createElement("i");
-        const productAddToCartText = document.createElement("p");
+        // const productAddToCartBtn = document.createElement("button");
+        // const productAddToCartIcon = document.createElement("i");
+        // const productAddToCartText = document.createElement("p");
 
 
 
@@ -46,7 +74,7 @@ function addProductsToWebpage() {
         // When clicking on the add to shopping cart button the object gets stored in local storage
         productAddToCartBtn.addEventListener("click", function () {
             this.setAttribute("disabled", true);
-            console.log(product);
+            // console.log(product);
             if (!localStorage.getItem("cart")) {
                 localStorage.setItem("cart", JSON.stringify([product]));
             } else {
@@ -54,6 +82,7 @@ function addProductsToWebpage() {
                 cart.push(product);
                 localStorage.setItem("cart", JSON.stringify(cart));
             }
+            totalCartProducts();
         });
 
 
@@ -62,22 +91,7 @@ function addProductsToWebpage() {
 
 
 
-
-        const productImageURL = "./assets/" + product.image;
-        // setElement("mgjhj", "div", "my-div", productContainer);
-        // setElement("this is a new object", "h3", "product", x);
-        const divdiv = setElement("", "div", "productContainer", document.querySelector("main"));
-        console.log(divdiv);
-        setElement(product.title, "h1", "productTitle", divdiv);
-        setElement(product.description, "p", "productDescription", divdiv);
-        setElement(productImageURL, "img", "productImage", divdiv, productImageURL, `Picture of a ${product.title}`);
-        setElement(`${product.price} kr`, "h2", "productPrice", divdiv);
-        const btn = setElement("", "button", "productAddToCartBtn", divdiv);
-        setElement("", "i", "fa-solid fa-cart-arrow-down productAddToCartIcon", btn);
-        setElement("Lägg till i kundvagnen", "p", "productAddToCartText", btn);
-
-
-        // // CLASSES
+        // CLASSES
         // productContainer.classList = ("productContainer");
         // productTitle.classList = ("productTitle");
         // productDescription.classList = ("productDescription");
@@ -94,15 +108,15 @@ function addProductsToWebpage() {
         // productTitle.innerText = product.title;
         // productDescription.innerText = product.description;
 
-        // // PRODUCT IMAGE
-
+        // PRODUCT IMAGE
+        // const productImageURL = "./assets/" + product.image;
         // productImage.setAttribute("src", productImageURL);
         // productImage.setAttribute("alt", `Picture of a ${product.title}`);
 
-        // // PRODUCT PRICE
+        // PRODUCT PRICE
         // productPrice.innerText = `${product.price} kr`;
 
-        // // ADD TO SHOPPING CART TEXT
+        // ADD TO SHOPPING CART TEXT
         // productAddToCartText.innerText = "Lägg till i kundvagnen";
 
 
@@ -117,13 +131,14 @@ function addProductsToWebpage() {
         // productContainer.appendChild(productAddToCartBtn);
         // productAddToCartBtn.appendChild(productAddToCartIcon);
         // productAddToCartBtn.appendChild(productAddToCartText);
-
     }
 }
 
 
 // Checks if there is a cart key in local storage and if so it adds them to the shopping cart page, otherwise if not then nothing really happens
 function addLocalStorageCartProductsToCartPage() {
+
+    totalCartProducts();
 
     const cartEmptyContainer = document.querySelector(".cart-empty-container");
 
@@ -138,13 +153,21 @@ function addLocalStorageCartProductsToCartPage() {
         let totalPrice = 0;
 
         // Container that holds all the cartProductContainers
+        const cartContainer = setElement("div", null, "cartContainer", document.querySelector("main"))
         // const cartContainer = document.createElement("div");
 
-        for (const product of cartListOfProducts) {
-            const productImageURL = "./assets/" + product.image;
-            totalPrice += product.price;
+        for (const cartProduct of cartListOfProducts) {
+
+            totalPrice += cartProduct.price;
 
             // CART PRODUCT ELEMENTS
+            const cartProductContainer = setElement("div", null, "cartProductContainer", cartContainer);
+            setImgElement(`./assets/${cartProduct.image}`, `Picture of a ${cartProduct.title}`, "cartProductImage", cartProductContainer);
+            setElement("h1", cartProduct.title, "cartProductTitle", cartProductContainer);
+            setElement("h2", `${cartProduct.price} kr`, "cartProductPrice", cartProductContainer);
+            const cartProductRemoveBtn = setElement("buttun", null, "cartProductRemoveFromCartBtn", cartProductContainer);
+            setElement("i", null, "fa-regular fa-trash-can cartProductRemoveFromCartIcon", cartProductRemoveBtn);
+            setElement("p", "Ta bort", "cartProductRemoveFromCartText", cartProductRemoveBtn);
             // const cartProductContainer = document.createElement("div");
             // const cartProductImage = document.createElement("img");
             // const cartProductTitle = document.createElement("h1");
@@ -154,13 +177,7 @@ function addLocalStorageCartProductsToCartPage() {
             // const cartProductRemoveFromCartText = document.createElement("p");
 
 
-            const divdiv = setElement("", "div", "productContainer", document.querySelector("main"));
-            setElement(productImageURL, "img", "productImage", divdiv, productImageURL, `Picture of a ${product.title}`);
-            setElement(product.title, "h1", "productTitle", divdiv);
-            setElement(`${product.price} kr`, "h2", "productPrice", divdiv);
-            const btn = setElement("", "button", "productAddToCartBtn", divdiv);
-            setElement("", "i", "fa-regular fa-trash-can cartProductRemoveFromCartIcon", btn);
-            setElement("Ta bort", "p", "productAddToCartText", btn);
+
 
             // CLASSES
             // cartContainer.classList = ("cartContainer");
@@ -175,24 +192,24 @@ function addLocalStorageCartProductsToCartPage() {
 
 
 
-            // LOCALSTORAGE PRODUCT IMAGE
-            // // const productImageURL = "./assets/" + cartProduct.image;
+            // // LOCALSTORAGE PRODUCT IMAGE
+            // const productImageURL = "./assets/" + cartProduct.image;
             // cartProductImage.setAttribute("src", productImageURL);
             // cartProductImage.setAttribute("alt", `Picture of a ${cartProduct.title}`);
 
-            // // LOCALSTORAGE PRODUCT TITLE
+            // LOCALSTORAGE PRODUCT TITLE
             // cartProductTitle.innerText = cartProduct.title;
 
             // // // LOCALSTORAGE PRODUCT PRICE
             // cartProductPrice.innerText = `${cartProduct.price} kr`;
 
-            // // // LOCALSTORAGE REMOVE FROM SHOPPING CART
+            // // LOCALSTORAGE REMOVE FROM SHOPPING CART
             // cartProductRemoveFromCartText.innerText = "Ta bort";
 
 
 
 
-            // // PRODUCTS APPENDED INSIDE OF CART CONTAINER
+            // PRODUCTS APPENDED INSIDE OF CART CONTAINER
             // document.querySelector("main").appendChild(cartContainer);
             // cartContainer.appendChild(cartProductContainer);
             // cartProductContainer.appendChild(cartProductImage);
@@ -201,21 +218,52 @@ function addLocalStorageCartProductsToCartPage() {
             // cartProductContainer.appendChild(cartProductRemoveFromCartBtn);
             // cartProductRemoveFromCartBtn.appendChild(cartProductRemoveFromCartIcon);
             // cartProductRemoveFromCartBtn.appendChild(cartProductRemoveFromCartText);
+
+
+
+
+            // This function removes the parent container that holds all the cart products as well as the total price header & complete purchase button
+            function removesCartContent() {
+                cartContainer.remove();
+                cartTotalPrice.remove();
+                cartCompletePurchaseBtn.remove();
+            }
+
+
+
+
+            // When you press the product "Ta bort" button it removes the object from cart LS
+            cartProductRemoveBtn.addEventListener("click", function () {
+                // cartProduct is the object of the cartListOfProducts array
+                this.setAttribute("disabled", true);
+                let cartIndex = cartListOfProducts.indexOf(cartProduct);
+                cartListOfProducts.splice(cartIndex, 1)
+                localStorage.setItem("cart", JSON.stringify(cartListOfProducts));
+
+                if (localStorage.getItem("cart") == "[]") {
+                    localStorage.removeItem("cart");
+                    removesCartContent();
+                    addLocalStorageCartProductsToCartPage();
+                } else {
+                    removesCartContent();
+                    addLocalStorageCartProductsToCartPage();
+                }
+
+            });
         }
 
         // TOTAL PRICE & COMPLETE PURCHASE
+        const cartTotalPrice = setElement("h2", `Totalt pris: ${totalPrice} kr`, "cartTotalPrice", document.querySelector("main"));
+        const cartCompletePurchaseBtn = setElement("button", null, "cartCompletePurchaseBtn", document.querySelector("main"));
+        setElement("i", null, "fa-solid fa-check cartCompletePurchaseIcon", cartCompletePurchaseBtn);
+        setElement("p", "Slutför ditt köp", "cartCompletePurchaseText", cartCompletePurchaseBtn)
+
         // const cartTotalPrice = document.createElement("h2");
         // const cartCompletePurchaseBtn = document.createElement("button");
         // const cartCompletePurchaseIcon = document.createElement("i");
         // const cartCompletePurchaseText = document.createElement("p");
 
         // CLASSES
-
-        const divdiv = setElement(`Totalt pris: ${totalPrice} kr`, "h2", "cartTotalPrice", document.querySelector("main"));
-        const btn = setElement("", "button", "productAddToCartBtn", divdiv);
-        setElement("", "i", "fa-solid fa-check cartCompletePurchaseIcon", btn);
-        setElement("Slutför ditt köp", "p", "productAddToCartText", btn);
-
         // cartTotalPrice.classList = ("cartTotalPrice");
         // cartCompletePurchaseBtn.classList = ("cartCompletePurchaseBtn");
         // cartCompletePurchaseIcon.classList = ("fa-solid fa-check cartCompletePurchaseIcon");
@@ -224,10 +272,10 @@ function addLocalStorageCartProductsToCartPage() {
         // TOTAL PRICE IN <H2>
         // cartTotalPrice.innerText = `Totalt pris: ${totalPrice} kr`;
 
-        // // COMPLETE PURCHASE BUTTON <p> TEXT
+        // COMPLETE PURCHASE BUTTON <p> TEXT
         // cartCompletePurchaseText.innerText = "Slutför ditt köp";
 
-        // // TOTAL PRICE + COMPLETE PURCHASE BUTTON APPENDED IN MAIN
+        // TOTAL PRICE + COMPLETE PURCHASE BUTTON APPENDED IN MAIN
         // document.querySelector("main").appendChild(cartTotalPrice);
         // document.querySelector("main").appendChild(cartCompletePurchaseBtn);
         // cartCompletePurchaseBtn.appendChild(cartCompletePurchaseIcon);
@@ -235,8 +283,7 @@ function addLocalStorageCartProductsToCartPage() {
 
 
     } else {
-        cartEmptyContainer.style.display = "block";
-        console.log("Kungvagnen är tom!");
-        return;
+        cartEmptyContainer.style.display = "flex";
+        // console.log("Kungvagnen är tom!");
     }
 };
