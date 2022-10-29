@@ -231,12 +231,12 @@ function addLocalStorageCartProductsToCartPage() {
 
             });
         }
-
+const cartCompletePurchaseAnchor =setElement("a",null,"cartCompletePurchaseAnchor",cartCompletePurchaseBtn);
         // TOTAL PRICE & COMPLETE PURCHASE
         const cartTotalPrice = setElement("h2", `Totalt pris: ${totalPrice} kr`, "cartTotalPrice", document.querySelector("main"));
         const cartCompletePurchaseBtn = setElement("button", null, "cartCompletePurchaseBtn", document.querySelector("main"));
         setElement("i", null, "fa-solid fa-check cartCompletePurchaseIcon", cartCompletePurchaseBtn);
-        setElement("p", "Slutför ditt köp", "cartCompletePurchaseText", cartCompletePurchaseBtn)
+        setElement("p", "Slutför ditt köp", "cartCompletePurchaseText", cartCompletePurchaseBtn);
 
         // const cartTotalPrice = document.createElement("h2");
         // const cartCompletePurchaseBtn = document.createElement("button");
