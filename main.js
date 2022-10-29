@@ -260,6 +260,11 @@ function addLocalStorageCartProductsToCartPage() {
         // document.querySelector("main").appendChild(cartCompletePurchaseBtn);
         // cartCompletePurchaseBtn.appendChild(cartCompletePurchaseIcon);
         // cartCompletePurchaseBtn.appendChild(cartCompletePurchaseText);
+        
+         cartCompletePurchaseBtn.addEventListener("click", () => {
+            cartCompletePurchaseAnchor.setAttribute("href", "ordercomplete.html");
+            cartCompletePurchaseAnchor.style.textDecoration = "none";
+            localStorage.removeItem("cart");
 
 
     } else {
