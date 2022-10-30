@@ -233,7 +233,7 @@ function addLocalStorageCartProductsToCartPage() {
         }
 
         // TOTAL PRICE & COMPLETE PURCHASE
-        setElement("h2", `Totalt pris: ${totalPrice} kr`, "cartTotalPrice", document.querySelector("main"));
+        const cartTotalPrice = setElement("h2", `Totalt pris: ${totalPrice} kr`, "cartTotalPrice", document.querySelector("main"));
         const cartCompletePurchaseBtn = setElement("button", null, "cartCompletePurchaseBtn", document.querySelector("main"));
 
         setElement("i", null, "fa-solid fa-check cartCompletePurchaseIcon", cartCompletePurchaseBtn);
