@@ -231,10 +231,11 @@ function addLocalStorageCartProductsToCartPage() {
 
             });
         }
-const cartCompletePurchaseAnchor =setElement("a",null,"cartCompletePurchaseAnchor",cartCompletePurchaseBtn);
+
         // TOTAL PRICE & COMPLETE PURCHASE
-        const cartTotalPrice = setElement("h2", `Totalt pris: ${totalPrice} kr`, "cartTotalPrice", document.querySelector("main"));
+        setElement("h2", `Totalt pris: ${totalPrice} kr`, "cartTotalPrice", document.querySelector("main"));
         const cartCompletePurchaseBtn = setElement("button", null, "cartCompletePurchaseBtn", document.querySelector("main"));
+
         setElement("i", null, "fa-solid fa-check cartCompletePurchaseIcon", cartCompletePurchaseBtn);
         setElement("p", "Slutför ditt köp", "cartCompletePurchaseText", cartCompletePurchaseBtn);
 
@@ -260,15 +261,16 @@ const cartCompletePurchaseAnchor =setElement("a",null,"cartCompletePurchaseAncho
         // document.querySelector("main").appendChild(cartCompletePurchaseBtn);
         // cartCompletePurchaseBtn.appendChild(cartCompletePurchaseIcon);
         // cartCompletePurchaseBtn.appendChild(cartCompletePurchaseText);
-        
-         cartCompletePurchaseBtn.addEventListener("click", () => {
-            cartCompletePurchaseAnchor.setAttribute("href", "ordercomplete.html");
-            cartCompletePurchaseAnchor.style.textDecoration = "none";
+        // const cartCompletePurchaseAnchor = setElement("a", null, "cartCompletePurchaseAnchor", cartCompletePurchaseBtn);
+        cartCompletePurchaseBtn.addEventListener("click", () => {
+            // cartCompletePurchaseAnchor.setAttribute("href", "ordercomplete.html");
+            // cartCompletePurchaseAnchor.style.textDecoration = "none";
             localStorage.removeItem("cart");
-
+            window.location.replace("ordercomplete.html");
+        });
 
     } else {
         cartEmptyContainer.style.display = "flex";
-        // console.log("Kungvagnen är tom!");
+
     }
-};
+}
