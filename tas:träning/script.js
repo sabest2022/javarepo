@@ -7,6 +7,14 @@ traning(6);
 traning(10);
 traning(100)
 
+document.onload = () => {
+    document.body.style.backgroundColor = a.value;
+    if (localStorage.getItem("color")) {
+        localStorage.setItem("color", JSON.stringify([]));
+        document.body.style.backgroundColor = a.value;
+    }
+}
+
 const d = document.createElement("div")
 d.classList = "mydiv";
 document.body.append(d);
@@ -28,9 +36,13 @@ b.addEventListener("click", () => {
     for (const color of colors) {
         if (a.value === color) {
             document.body.style.backgroundColor = a.value;
+            if (!localStorage.getItem("color")) {
+                localStorage.setItem("color", JSON.stringify([]))
+            }
             let ls = JSON.parse(localStorage.getItem("color"));
-            ls.push(a.value);
-            localStorage.setItem("color", ls)
+            ls.push(a.value)
+            console.log(ls);
+            localStorage.setItem("color", JSON.stringify(ls))
         } else {
             console.log("ogiltig färg!")
         }
