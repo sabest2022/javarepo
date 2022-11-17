@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Note app</title>
+
+</head>
+<style>
+    body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    button {
+        margin-top: 1rem;
+        width: 10rem;
+        height: 2rem;
+        font-size: 1rem;
+        background-color: rgb(120, 117, 113);
+        border-radius: 0.5rem;
+    }
+
+    button:hover {
+        background-color: rgb(151, 150, 149);
+    }
+
+    input {
+        margin-top: 4rem;
+        width: 10rem;
+        height: 2rem;
+        font-size: 1rem;
+        background-color: rgb(217, 215, 212);
+        border-radius: 0.5rem;
+    }
+
+    input:active {
+        background-color: rgb(252, 250, 252);
+    }
+
+    h1 {
+        margin-top: 3rem;
+        padding: 0.3rem;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .mytext {
+        width: 20rem;
+        min-height: 5rem;
+        margin: 1rem;
+        padding: 0.5rem;
+        border-radius: 0.5rem;
+        font-size: 1rem;
+    }
+
+    .delbut,
+    .editbut,
+    .showbut {
+        margin-top: 0.3rem;
+        width: 3rem;
+        height: 1rem;
+        font-size: 0.7rem;
+        background-color: rgb(85, 86, 100);
+        color: azure;
+        border-radius: 0.5rem;
+    }
+
+    .datelist {
+        font-size: 0.5rem;
+    }
+
+    .divlist {
+        width: 9rem;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        border: solid 1px rgb(89, 89, 97);
+        border-radius: 0.4rem;
+        margin: 0.3rem;
+        padding: 0.4rem;
+    }
+
+    .divclas {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        border-radius: 0.4rem;
+        margin: 0.3rem;
+        padding: 0.4rem;
+    }
+
+    .newtextbut {
+        width: 7rem;
+    }
+
+    .divlists {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 0.5rem;
+        margin-top: 1rem;
+    }
+</style>
+
+<body>
+    <script>
+        let dagbok = [];
+        let datedagbok = []
+        init();
+        function setElement(type, content, append, clas) {
+            const x = document.createElement(type);
+            x.textContent = content;
+            append.append(x);
+            x.classList.add(clas);
+            return x;
+        }
+        nowdate = new Date();
+
+        document.addEventListener("onbeforeunload", () => {
+            return " Changes that you made may not be saved.";
+        })
+
+        const container = setElement("div", null, document.body, "divclas");
+        const newnote = setElement("button", "New note!", document.querySelector(".divclas"), "newtextbut");
+        newnote.addEventListener("click", () => {
+            thetext.style.display = "flex";
+            newnote.style.display = "none"
+            thetext.value = null;
+        })
+
+        const thetext = setElement("textarea", null, document.querySelector(".divclas"), "mytext");
+        thetext.addEventListener("blur", () => {
+            save();
+            newnote.style.display = "flex"
+        })
+        thetext.style.display = "none";
+
+        function init() {
+            if (document.querySelector(".divlist")) {
+                document.querySelector(".divlist").remove();
+            }
+
+            if (localStorage.getItem("dagbok")) {
+                dagbok = JSON.parse(localStorage.getItem("dagbok",));
+                datedagbok = JSON.parse(localStorage.getItem("datedagbok",));
+                const divlists = setElement("div", null, document.body, "divlists");
+                if (!localStorage.getItem("dagbok") || !localStorage.getItem("datedagbok")) {
+                    localStorage.setItem("dagbok", JSON.stringify([]));
+                    localStorage.setItem("datedagbok", JSON.stringify([]))
+                }
+                for (const d in dagbok) {
+                    // let dindex = dagbok.indexOf(d);
+                    // dagbok.push(thetext.value);
+                    const divlist = setElement("div", null, document.querySelector(".divlists"), "divlist");
+                    const newtext = setElement("p", `${JSON.stringify(dagbok[d]).slice(0, 15)} `, divlist, "todolist");
+                    const datetext = setElement("ul", `${datedagbok[d]}`, divlist, "datelist");
+                    const delbut = setElement("button", "Delete", divlist, "delbut");
+                    const editbut = setElement("button", "Edit", divlist, "editbut");
+                    const showbut = setElement("button", "show", divlist, "showbut");
+                    showbut.addEventListener("click", () => {
+                        thetext.style.display = "flex";
+                        const editedt = dagbok.slice(d, d + 1);
+                        thetext.value = null;
+                        thetext.value = editedt[0];
+                    })
+                    editbut.addEventListener("click", function () {
+                        thetext.style.display = "flex";
+                        const editedt = dagbok.slice(d, d + 1);
+                        thetext.value = null;
+                        thetext.value = editedt[0];
+                        // console.log(dagbok.slice(d, d + 1));
+                        // console.log(editedt[0]);
+
+                        dagbok.splice(d, 1);
+                        datedagbok.splice(d, 1);
+                        localStorage.setItem("dagbok", JSON.stringify(dagbok));
+                        localStorage.setItem("datedagbok", JSON.stringify(datedagbok));
+                        divlists.remove();
+
+                        init();
+                    })
+                    delbut.addEventListener("click", function () {
+                        this.setAttribute("disbaled", true);
+
+                        let text = "Are you sure about delete the note!";
+                        if (confirm(text) == true) {
+                            dagbok.splice(d, 1);
+                            localStorage.setItem("dagbok", JSON.stringify(dagbok));
+                            datedagbok.splice(d, 1);
+                            localStorage.setItem("datedagbok", JSON.stringify(datedagbok));
+                            divlist.remove();
+                        }
+                    })
+                }
+            }
+        }
+        init();
+        function save() {
+            if (document.querySelector(".divlist")) {
+                document.querySelector(".divlist").remove();
+            }
+            if (!thetext.value == "") {
+                dagbok = JSON.parse(localStorage.getItem("dagbok"));
+                datedagbok = JSON.parse(localStorage.getItem("datedagbok"));
+                dagbok.push(thetext.value);
+                datedagbok.push(nowdate.toDateString())
+                localStorage.setItem("dagbok", JSON.stringify(dagbok));
+                localStorage.setItem("datedagbok", JSON.stringify(datedagbok));
+                thetext.value = null;
+            }
+
+            if (document.querySelector(".divlists")) {
+                document.querySelector(".divlists").remove();
+            }
+            thetext.style.display = "none";
+        };
+    </script>
+</body>
+
+</html>

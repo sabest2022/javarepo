@@ -107,13 +107,30 @@
         flex-wrap: wrap;
         padding: 0.5rem;
         margin-top: 1rem;
+    }
 
+    #time-start-input,
+    #time-end-input,
+    #date-input {
+        width: 8rem;
+        height: 1rem;
     }
 </style>
 
 <body>
-    <script src="main.js"></script>
-    <p id="demo">rfgn</p>
+
+
+    <div id="mydiv">
+        <input type="date" class="date-input" value="2000-05-05">
+        <span class="validity"></span>
+        <input type="time" id="time-start-input">
+        <input type="time" id="time-end-input">
+        <button class="submit" onclick="myFunction6()"> Submit</button>
+        <p id="demo">demo</p>
+    </div>
+
+
+    <script src="script.js"></script>
 </body>
 
 </html>
